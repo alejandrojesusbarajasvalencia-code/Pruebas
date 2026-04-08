@@ -1,34 +1,43 @@
-nombre = ""
-
 ## funciones
-def ingresar_nombre():
-    nombre = input("Ingrese un nombre:\n")
-    return nombre
-
-
-def mostrar_nombre(nombre):
-    if nombre == "":
-        print("No existe un nombre\n")
+def ingresar_nombre(nombre):
+    if nombre != "":
+        print("Ya hay un nombre guardado")
+        return nombre
     else:
-        print(f"El nombre guardado es: {nombre}")
+        nombre = input("Ingrese un nombre:\n")
+        return nombre
 
 
 def borrar_nombre(nombre):
-    nombre = ""
-    print("Se ha borrado el nombre")
-    return nombre
+    if nombre == "":
+        print("No existe un nombre guardado aun\n")
+        return ""
+    else:
+        print("Se ha borrado el nombre")
+        return ""
 
 
 def actualizar_nombre(nombre):
     if nombre == "":
         print("No existe un nombre guardado aun\n")
+        return ""
     else:
-        nuevo = input("Ingrese el nuevo nombre:\n")
-        nombre = nuevo
-    return nombre
-##
+        nombre = input("Ingrese el nuevo nombre:\n")
+        return nombre
 
-## primera iteracion y menu repetitivo
+
+def mostrar_nombre(nombre):
+    if nombre == "":
+        print("No existe un nombre guardado aun\n")
+    else:
+        print(f"El nombre guardado es: {nombre}")
+
+    ##
+
+    ## primera iteracion y menu repetitivo
+
+
+nombre = ""
 opcion = 1
 
 while opcion != 0:
@@ -43,7 +52,7 @@ while opcion != 0:
 
     ## opciones llamadas en main
     if opcion == 1:
-        nombre = ingresar_nombre()
+        nombre = ingresar_nombre(nombre)
 
     elif opcion == 2:
         nombre = borrar_nombre(nombre)
@@ -53,6 +62,9 @@ while opcion != 0:
 
     elif opcion == 4:
         mostrar_nombre(nombre)
+
+    elif opcion == 0:
+        print("Saliendo del programa...")
 
     else:
         print("Esa opcion no existe, intenta con otra")
