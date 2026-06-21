@@ -14,12 +14,15 @@ def agregar_nombres(nombre_archivo, nombres):
     while True:
         try:
             cantidad = int(input("Elija cuantos nombres quiere agregar:\n"))
-            break
+            
+            if cantidad >= 1:
+             break
+            print("La cantidad debe ser mayor o igual a 1")
         except ValueError:
             print("Eso no es un numero valido, intenta de nuevo")
 
     for c in range(cantidad):
-        nuevo = input("Ingrese un nombre a agregar:\n")
+        nuevo = input("Ingrese un nombre a agregar:\n").capitalize()
         nuevos.append(nuevo)
 
     ## cambios en archivo
@@ -55,7 +58,7 @@ def borrar_nombre(nombre_archivo, nombres):
                 )
 
         if borrar_varios_o_uno == 1:
-            buscar = input("Escriba el nombre a borrar:\n")
+            buscar = input("Escriba el nombre a borrar:\n").capitalize()
 
             if buscar in nombres:
                 archivo = open(nombre_archivo, "w")
@@ -96,7 +99,7 @@ def actualizar_nombre(nombre_archivo, nombres):
         return nombres
     else:
         if len(nombres) == 1:
-            nuevo = input("Ingrese el nuevo nombre:\n")
+            nuevo = input("Ingrese el nuevo nombre:\n").capitalize()
 
             ## cambios en memoria
             nombres[0] = nuevo
@@ -110,17 +113,17 @@ def actualizar_nombre(nombre_archivo, nombres):
             return nombres
 
         else:
-            
-            buscar =  input("Ingrese el nombre a actualizar:\n")
+
+            buscar = input("Ingrese el nombre a actualizar:\n").capitalize()
             if buscar in nombres:
-                nuevo = input("Ingrese el nuevo nombre:\n")
+                nuevo = input("Ingrese el nuevo nombre:\n").capitalize()
 
                 ##cambios en memoria
                 numero_indice = nombres.index(buscar)
                 nombres[numero_indice] = nuevo
 
                 ## cambios en archivo
-                archivo = open(nombre_archivo, 'w')
+                archivo = open(nombre_archivo, "w")
                 for c in nombres:
                     archivo.write(c + "\n")
                 archivo.close()
@@ -146,6 +149,19 @@ def mostrar_nombre(nombres):
     ## primera iteracion y menu repetitivo
 
 
+def buscar_nombre(nombres):
+    if not nombres:
+        print("No existe un nombre guardado aun\n")
+    else:
+        buscar = input("Ingrese el nombre a buscar: ").capitalize()
+        if buscar in nombres:
+            numero_indice = nombres.index(buscar)
+            print(f"el nombre {nombres[numero_indice]} se encuentra en la lista")
+            return nombres
+        else:
+            print("No se ha encontrado el nombre")
+            return nombres
+    
 def main():
 
     nombres = abrir_archivo()
@@ -154,7 +170,8 @@ def main():
     while opcion != 0:
         print(
             "---------Menu---------\n"
-            "1) Ingresar nombres\n2) Borrar nombre\n3) Actualizar nombre\n4) Mostrar nombre\n5) Agregar nombres\n0) Salir"
+            "1) Ingresar nombres\n2) Borrar nombre\n3) Actualizar nombre\n4) "
+            "Mostrar nombres\n5) Buscar nombre\n0) Salir"
         )
         try:
             opcion = int(
@@ -177,6 +194,9 @@ def main():
         elif opcion == 4:
             mostrar_nombre(nombres)
 
+        elif opcion == 5:
+            buscar_nombre(nombres)
+            
         elif opcion == 0:
             print("Saliendo del programa...")
 
