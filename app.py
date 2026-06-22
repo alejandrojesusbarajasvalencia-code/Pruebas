@@ -23,7 +23,10 @@ def agregar_nombres(nombre_archivo, nombres):
 
     for c in range(cantidad):
         nuevo = input("Ingrese un nombre a agregar:\n").capitalize()
-        nuevos.append(nuevo)
+        if nuevo in nuevos or nombres:
+            print("Ese nombre ya existe")
+        else:
+         nuevos.append(nuevo)
 
     ## cambios en archivo
     archivo = open(nombre_archivo, "a")
@@ -81,9 +84,10 @@ def borrar_nombre(nombre_archivo, nombres):
                 archivo = open(nombre_archivo, "w")
                 archivo.write("")
                 archivo.close()
-                print("Se ha borrado el nombre")
+                print("Se han borrado los nombre")
                 return []
             else:
+                print("No se han borrado los nombres, regresando al menu...")
                 return nombres
 
         else:
